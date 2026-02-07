@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import api from '@/services/api';
 import { useAppSelector, useAppDispatch } from '@/app/hooks';
 import MapComponent from '@/components/MapComponent';
 import { Button } from '@/components/ui/button';
@@ -30,7 +30,7 @@ const ProviderDashboard = () => {
         try {
             const token = user?.token;
             if (token) {
-                await axios.put('/api/auth/location', {
+                await api.put('/api/auth/location', {
                     coordinates: [coords[1], coords[0]],
                     address: "Live Tracking Active"
                 }, {
@@ -48,7 +48,7 @@ const ProviderDashboard = () => {
         try {
             const token = user?.token;
             if (token) {
-                const res = await axios.get(`/api/requests/nearby?longitude=${currentLocation[1]}&latitude=${currentLocation[0]}&radius=20`, {
+                const res = await api.get(`/api/requests/nearby?longitude=${currentLocation[1]}&latitude=${currentLocation[0]}&radius=20`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setNearbyRequests(res.data);
@@ -64,7 +64,7 @@ const ProviderDashboard = () => {
         try {
             const token = user?.token;
             if (token) {
-                const res = await axios.get('/api/requests/my', {
+                const res = await api.get('/api/requests/my', {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 const active = res.data.find((r: any) => ['accepted', 'in_progress', 'pending_payment'].includes(r.status));
@@ -123,7 +123,7 @@ const ProviderDashboard = () => {
         try {
             const token = user?.token;
             if (token) {
-                const res = await axios.put(`/api/requests/${requestId}/accept`, {}, {
+                const res = await api.put(`/api/requests/${requestId}/accept`, {}, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 toast.success("Request accepted. Proceed to location.");
@@ -147,7 +147,7 @@ const ProviderDashboard = () => {
         try {
             const token = user?.token;
             if (token) {
-                await axios.put(`/api/requests/${activeJob._id}/status`, { status }, {
+                await api.put(`/api/requests/${activeJob._id}/status`, { status }, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 toast.info(`Status updated to ${status.replace('_', ' ')}`);
@@ -170,7 +170,7 @@ const ProviderDashboard = () => {
         try {
             const token = user?.token;
             if (token) {
-                await axios.put(`/api/requests/${activeJob._id}/complete`, { finalPrice: price }, {
+                await api.put(`/api/requests/${activeJob._id}/complete`, { finalPrice: price }, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 toast.success("Job marked as complete. Awaiting customer payment.");

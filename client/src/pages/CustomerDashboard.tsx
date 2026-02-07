@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '@/services/api';
 import { useAppSelector } from '@/app/hooks';
 import MapComponent from '@/components/MapComponent';
 import { Button } from '@/components/ui/button';
@@ -78,7 +78,7 @@ export default function CustomerDashboard() {
             const token = user?.token;
             if (!token) return;
 
-            const res = await axios.get('/api/requests/my', {
+            const res = await api.get('/api/requests/my', {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -106,7 +106,7 @@ export default function CustomerDashboard() {
                 notes: "Requesting professional assistance",
             };
 
-            const res = await axios.post('/api/requests', payload, {
+            const res = await api.post('/api/requests', payload, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setActiveRequest(res.data);
@@ -124,7 +124,7 @@ export default function CustomerDashboard() {
         setIsLoading(true);
         try {
             const token = user?.token;
-            await axios.put(`/api/requests/${activeRequest._id}/pay`, {}, {
+            await api.put(`/api/requests/${activeRequest._id}/pay`, {}, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.success("Payment Successful!");
@@ -143,7 +143,7 @@ export default function CustomerDashboard() {
 
         try {
             const token = user?.token;
-            await axios.put(`/api/requests/${activeRequest._id}/cancel`, {}, {
+            await api.put(`/api/requests/${activeRequest._id}/cancel`, {}, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.info("Request cancelled.");
