@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Clock, MapPin, CheckCircle, ArrowRight, Menu, X, Users, PhoneCall } from 'lucide-react';
+import { Shield, Clock, MapPin, CheckCircle, ArrowRight, Menu, X, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 

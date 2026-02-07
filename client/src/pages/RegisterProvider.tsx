@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { motion } from 'framer-motion';
-import { Loader2, Shield, ArrowRight, Briefcase } from 'lucide-react';
+import { Loader2, ArrowRight, Briefcase } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { register as registerUser, reset } from '@/features/auth/authSlice';
