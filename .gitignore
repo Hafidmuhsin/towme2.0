@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Production
+build/
+dist/
+
+# Env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Local Mongo and large files
+mongo.zip
+mongo_data/
+mongodb/
+setup_mongo.ps1
+setup_mongo_v2.ps1
+
+# Misc
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
